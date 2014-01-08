@@ -1,36 +1,38 @@
+const DEVICE_TYPE = 'browser';  // browser or mobile
+
 var map = null;
 var map_canvas = null;
 var loader = null;
 var latitude = 48.1481600;
 var longitude = 17.1067400;
 
-// inicializacia
 var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-        //alert(this.bindEvents());
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, this.onDeviceError);
+        switch (DEVICE_TYPE) {
+            case 'mobile':
+                document.addEventListener('deviceready', this.onDeviceReady, false);
+                break;
+            case 'browser':
+                this.onDeviceReady();
+                break;
+            default:
+                this.onDeviceReady();
+                break;
+    }
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        //alert('deviceready');
-        onLoad();
-    },
-    // deviceready Event Handler
-    //
-    // Function is call, when deviceread listener return false
-    onDeviceError: function() {
-        //alert('deviceerror');
         onLoad();
     }
 };
@@ -53,6 +55,9 @@ function getPosition () {
     if (navigator.geolocation) {
         var options = {timeout: 4000};
         navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+    }
+    else {
+        loader.hide();
     }
 }
 
@@ -87,7 +92,15 @@ function onError(error) {
             break;
     }
 
-    initializeMap(latitude, longitude, 'Bratislava');
+    // check internet conection
+    if (navigator.onLine === true) {
+        // default position
+        initializeMap(latitude, longitude, 'Bratislava');
+    }
+    else {
+        loader.hide();
+    }
+
 }
 
 // google map initialize
