@@ -1,4 +1,4 @@
-const DEVICE_TYPE = 'browser';  // browser or mobile
+const DEVICE_TYPE = 'mobile';  // browser or mobile
 
 var map = null;
 var map_canvas = null;
