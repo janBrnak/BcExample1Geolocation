@@ -26,7 +26,7 @@ var app = {
             default:
                 this.onDeviceReady();
                 break;
-    }
+        }
     },
     // deviceready Event Handler
     //

@@ -102,4 +102,8 @@
     <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
     <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
     -->
+<<<<<<< HEAD
 </widget>
+=======
+</widget>
+>>>>>>> 5b8c82151936d95275b45da2974f0bb3344b62c7
